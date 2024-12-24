@@ -1,50 +1,138 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + Docker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This template provides a minimal setup for a React application using TypeScript, Vite, and Docker. It is designed to be lightweight and easy to extend, making it a great starting point for modern web development projects.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- React with TypeScript
+- Vite for fast builds and development
+- Docker for containerized development and deployment
+- Ready to use as a template for future projects
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Prerequisites
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Before you start, ensure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [pnpm](https://pnpm.io/) (for dependency management)
+- [Docker](https://www.docker.com/) and Docker Compose
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/tamakunay/react-vite-ts-docker.git
+cd react-vite-ts-docker
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Install Dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+pnpm install
 ```
+
+### 3. Run the Development Server
+
+Start the development server locally (without Docker):
+
+```bash
+pnpm dev
+```
+
+This will start the Vite development server. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## Using Docker
+
+You can run the app using Docker for a containerized environment.
+
+### Build and Run with Docker
+
+1. Build the Docker image:
+
+   ```bash
+   docker compose build
+   ```
+
+2. Start the container:
+
+   ```bash
+   docker compose up
+   ```
+
+3. Open the app in your browser at [http://localhost:3000](http://localhost:3000).
+
+### File Structure in the Container
+
+The `dist` directory is generated during the build process and served by the `serve` package inside the container.
+
+---
+
+## Project Structure
+
+```
+├── Dockerfile          # Docker configuration for building the image
+├── docker-compose.yml  # Docker Compose setup for running the app
+├── src/                # Source code for the React app
+│   ├── App.tsx         # Main App component
+│   ├── main.tsx        # Entry point for the application
+├── public/             # Public static files
+├── package.json        # Project dependencies and scripts
+├── pnpm-lock.yaml      # Lockfile for pnpm
+├── tsconfig.json       # TypeScript configuration
+├── vite.config.ts      # Vite configuration
+```
+
+---
+
+## Scripts
+
+### Development
+
+Start the development server:
+
+```bash
+pnpm dev
+```
+
+### Build
+
+Create a production build:
+
+```bash
+pnpm build
+```
+
+### Serve
+
+Serve the production build locally:
+
+```bash
+pnpm preview
+```
+
+---
+
+## Extending the Template
+
+This template is designed to be minimal yet scalable. You can:
+
+- Add ESLint for code quality
+- Add unit testing with libraries like Jest or Vitest
+- Use Docker for multi-stage builds in production
+- Extend Vite's configuration as needed
+
+---
+
+## License
+
+This template is open-source and licensed under the [MIT License](LICENSE).
+
